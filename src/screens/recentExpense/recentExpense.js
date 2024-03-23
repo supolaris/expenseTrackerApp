@@ -9,12 +9,12 @@ export default function RecentExpenseScreen() {
  
   const expensesCtx = useContext(ExpensesContext);
 
-  const recentExpenses = expensesCtx.filter((expense) => {
+  const recentExpenses = expensesCtx.expenses.filter((expense) => {
     const today = new Date();
     const date7DaysAgo = getDateMiusDays(today, 7);
 
-    return expense.date > date7DaysAgo;
-  })
+    return (expense.date >= date7DaysAgo) && (expense.date <= today);
+  });
 
   return (
     <ExpenseOutput expenses={recentExpenses} periodName = 'Recent Expenses'/>

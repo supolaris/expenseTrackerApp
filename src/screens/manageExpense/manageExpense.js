@@ -1,11 +1,15 @@
 import { Text, View, Pressable, StyleSheet } from 'react-native';
 import { ManageExpenseStyles } from './manageExpenseStyles';
-import { useLayoutEffect } from 'react';
+import { useContext, useLayoutEffect } from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import { AppColors } from '../../components/colors/colors';
 import CustomButton from '../../components/customButton/customButton';
+import { ExpensesContext } from '../../components/expenseComponents/store/expensesContext';
 
 export default function ManageExpenseScreen({ route, navigation }) {
+
+  const expensesCtx = useContext(ExpensesContext);
+
   const editedExpenseId = route.params?.expenseId;
   const isEditing = !!editedExpenseId;
 
@@ -24,6 +28,7 @@ export default function ManageExpenseScreen({ route, navigation }) {
   }, [navigation, isEditing]);
 
   function deleteExpenseHandler() {
+    expensesCtx.deleteExpense(editedExpenseId);
 
     navigation.goBack();
 
@@ -31,11 +36,19 @@ export default function ManageExpenseScreen({ route, navigation }) {
 
   function cancelHandler(){
 
+
     navigation.goBack();
 
   }
 
   function confirmHandler(){
+    if(isEditing){
+      expensesCtx.updateExpense(
+
+      )
+    }else{
+      expensesCtx.addExpense();
+    }
 
     navigation.goBack();
 
