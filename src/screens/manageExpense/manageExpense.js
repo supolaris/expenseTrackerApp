@@ -5,6 +5,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { AppColors } from '../../components/colors/colors';
 import CustomButton from '../../components/customButton/customButton';
 import { ExpensesContext } from '../../components/expenseComponents/store/expensesContext';
+import ExpenseForm from '../../components/expenseForm/expenseForm';
 
 export default function ManageExpenseScreen({ route, navigation }) {
 
@@ -55,6 +56,7 @@ export default function ManageExpenseScreen({ route, navigation }) {
   }
 
   return <View style={styles.deleteIconMainView}>
+    <ExpenseForm />
     <View style={styles.customButtonView}>
       <CustomButton onPress={cancelHandler} propStyle={styles.propView} mode='flat' >Cancel</CustomButton>
       <CustomButton onPress={confirmHandler} propStyle={styles.propView} >{isEditing ? 'Update' : 'Add'}</CustomButton>
