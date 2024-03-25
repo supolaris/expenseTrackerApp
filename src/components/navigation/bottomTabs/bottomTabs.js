@@ -37,8 +37,8 @@ export function BottomTabs() {
                     tabBarIcon: ((iconColor, iconSize) =>
                         <Ionicons
                             name='calendar-outline'
-                            size={iconSize}
-                            color={iconColor}
+                            size={25}
+                            color={AppColors.pruple}
                         />)
 
                 }}
@@ -52,8 +52,8 @@ export function BottomTabs() {
                     tabBarLabel: 'All',
                     tabBarIcon: ((iconColor, iconSize) =>
                         <Ionicons name='hourglass'
-                            size={iconSize}
-                            color={iconColor}
+                        size={25}
+                        color={AppColors.pruple}
                         />)
 
                 }}

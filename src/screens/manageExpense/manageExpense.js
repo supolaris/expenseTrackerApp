@@ -42,13 +42,11 @@ export default function ManageExpenseScreen({ route, navigation }) {
 
   }
 
-  function confirmHandler(){
+  function confirmHandler(expenseData){
     if(isEditing){
-      expensesCtx.updateExpense(
-
-      )
+      expensesCtx.updateExpense(editedExpenseId, expenseData)
     }else{
-      expensesCtx.addExpense();
+      expensesCtx.addExpense(expenseData);
     }
 
     navigation.goBack();
@@ -56,11 +54,12 @@ export default function ManageExpenseScreen({ route, navigation }) {
   }
 
   return <View style={styles.deleteIconMainView}>
-    <ExpenseForm />
-    <View style={styles.customButtonView}>
-      <CustomButton onPress={cancelHandler} propStyle={styles.propView} mode='flat' >Cancel</CustomButton>
-      <CustomButton onPress={confirmHandler} propStyle={styles.propView} >{isEditing ? 'Update' : 'Add'}</CustomButton>
-    </View>
+    <ExpenseForm 
+    submitButtonLabel={isEditing ? 'Update' : 'Add'} 
+    onCancel={cancelHandler}
+    onSubmit={confirmHandler}
+    />
+
     {isEditing && (
 
       <View style={styles.deleteIconView}>
@@ -75,16 +74,6 @@ export default function ManageExpenseScreen({ route, navigation }) {
     }
 
   </View>
-
-
-
-
-  return (
-    <View style={ManageExpenseStyles.container}>
-
-      <Text>Open up App.js to start working on your app!</Text>
-    </View>
-  );
 }
 
 
@@ -94,15 +83,6 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 20,
     backgroundColor: AppColors.lightGreen
-
-  },
-  customButtonView: {
-    flexDirection: 'row',
-    justifyContent: 'center'
-  },
-  propView: {
-    minWidth: 50,
-    marginHorizontal: 5
 
   },
   deleteIconView: {

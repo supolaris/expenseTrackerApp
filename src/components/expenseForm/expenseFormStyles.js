@@ -21,6 +21,15 @@ export const ExpenseFormStyles = StyleSheet.create({
     amountDateView: {
         flexDirection: 'row'
 
-    }
-    
+    },
+    customButtonView: {
+        flexDirection: 'row',
+        justifyContent: 'center'
+    },
+    propView: {
+        minWidth: 50,
+        marginHorizontal: 5
+
+    },
+
 })

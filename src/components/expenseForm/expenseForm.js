@@ -2,10 +2,11 @@ import { View, Text } from 'react-native';
 import FormInput from './formInput/formInput';
 import { ExpenseFormStyles } from './expenseFormStyles';
 import { useState } from 'react';
+import CustomButton from '../customButton/customButton';
 
 
 
-export default function ExpenseForm() {
+export default function ExpenseForm({onCancel, onSubmit, submitButtonLabel}) {
 
     const [inputValues, setInputValues] = useState({
         amount: '',
@@ -23,7 +24,15 @@ export default function ExpenseForm() {
                 [inputIdentifier]: enteredValue
             };
         });
+    }
 
+    function submitHandler(){
+        const expenseData = {
+            amount: inputValues.amount,
+            date: new Date(inputValues.date),
+            description: inputValues.description
+        }
+        onSubmit(expenseData);
 
     }
 
@@ -60,6 +69,11 @@ export default function ExpenseForm() {
                 value={inputValues.description}
                 onchangeText={inputValueHandler.bind(this, 'description')}
             />
+
+            <View style={ExpenseFormStyles.customButtonView}>
+                <CustomButton onPress={onCancel} propStyle={ExpenseFormStyles.propView} mode='flat' >Cancel</CustomButton>
+                <CustomButton onPress={submitHandler} propStyle={ExpenseFormStyles.propView} >{submitButtonLabel}</CustomButton>
+            </View>
 
         </View>
 
